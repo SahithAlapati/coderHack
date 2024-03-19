@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.crio.coderHack.dto.UserDTO;
 import com.crio.coderHack.service.UserService;
 
-import com.crio.coderHack.model.User;
 
 @RestController
 @RequestMapping("/users")
@@ -23,14 +22,16 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserDTO> createUser(@RequestBody User user)
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO user)
     {
-        return ResponseEntity.ok().body(userService.createUser(user));
+        System.out.println("Started");
+        return ResponseEntity.ok(userService.createUser(user));
     }
 
     @GetMapping
     public ResponseEntity<List<UserDTO>> getAllusers()
     {
+        System.out.println("Started");
         return ResponseEntity.ok().body(userService.findAll());
     }
 

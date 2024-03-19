@@ -19,14 +19,16 @@ public class UserServiceImpl implements UserService {
     private ModelMapper modelMapper;
     
 
+    @SuppressWarnings("null")
     @Override
-    public UserDTO createUser(User u)
+    public UserDTO createUser(UserDTO u)
     {
         if(userRepository.findById(u.getId()).isPresent())
         {
             
         }
-        return modelMapper.map(userRepository.save(u),UserDTO.class);
+        User user=modelMapper.map(u,User.class);
+        return modelMapper.map(userRepository.save(user),UserDTO.class);
     }
 
     @Override
