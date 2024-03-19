@@ -9,5 +9,5 @@ import com.crio.coderHack.model.User;
 @Service
 public interface UserService {
 public UserDTO createUser(User u);  
-public List<User> findAll();  
+public List<UserDTO> findAll();  
 }
