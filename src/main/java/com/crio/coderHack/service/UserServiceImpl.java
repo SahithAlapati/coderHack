@@ -1,6 +1,7 @@
 package com.crio.coderHack.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
 
 import com.crio.coderHack.dto.UserDTO;
+import com.crio.coderHack.dto.UserScoreDTO;
 import com.crio.coderHack.exception.AlreadyPresentException;
+import com.crio.coderHack.exception.NotFoundException;
 import com.crio.coderHack.model.User;
 import com.crio.coderHack.repository.UserRepository;
 
@@ -36,6 +39,27 @@ public class UserServiceImpl implements UserService {
     public List<UserDTO> findAll() {
         ModelMapper modelMapper=new ModelMapper();
         return userRepository.findAll().stream().map(s->modelMapper.map(s,UserDTO.class)).collect(Collectors.toList());
+    }
+
+    @SuppressWarnings("null")
+    @Override
+    public Optional<UserDTO> findById(String id) {
+        Optional<User> user=userRepository.findById(id);
+        if(user.isEmpty())
+        throw new NotFoundException("User Not Found");
+        return Optional.of(modelMapper.map(user.get(),UserDTO.class));
+    }
+
+    @SuppressWarnings("null")
+    @Override
+    public Optional<UserDTO> putScoreByUserId(UserScoreDTO userScoreDTO) {
+        Optional<User> user=userRepository.findById(userScoreDTO.getId());
+        if(user.isEmpty())
+        throw new NotFoundException("User Not Found");
+        user.get().setScore(userScoreDTO.getScore());
+        userRepository.save(user.get());
+        return Optional.ofNullable(modelMapper.map(user.get(),UserDTO.class));
+
     }
 
     
