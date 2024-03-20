@@ -1,5 +1,6 @@
 package com.crio.coderHack.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -57,9 +58,31 @@ public class UserServiceImpl implements UserService {
         if(user.isEmpty())
         throw new NotFoundException("User Not Found");
         user.get().setScore(userScoreDTO.getScore());
+        user.get().setBadges(putBadgesByScore(userScoreDTO.getScore()));
         userRepository.save(user.get());
         return Optional.ofNullable(modelMapper.map(user.get(),UserDTO.class));
 
+    }
+
+    public List<String> putBadgesByScore(Integer score)
+    {
+        List<String> badges=new ArrayList<>();
+        if(score>=1)
+        badges.add("Code Ninja");
+        if(score>=30)
+        badges.add("Code Champ");
+        if(score>=60)
+        badges.add("Code Master");
+        return badges;
+    }
+
+    @SuppressWarnings("null")
+    @Override
+    public void deleteUserById(String id) {
+        Optional<User> user=userRepository.findById(id);
+        if(user.isEmpty())
+        throw new NotFoundException("User Not Found");
+        userRepository.deleteById(id);
     }
 
     

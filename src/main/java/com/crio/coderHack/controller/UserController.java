@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,10 +56,17 @@ public class UserController {
     {
         Optional<UserDTO> user = userService.putScoreByUserId(userScoreDTO);
         if (user.isPresent()) {
-            return ResponseEntity.ok(user.get());
+            return ResponseEntity.accepted().body(user.get());
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUserId(@NonNull @PathVariable String id)
+    {
+        userService.deleteUserById(id);
+        return ResponseEntity.ok().body("Deleted User Succesfully");
     }
 
 

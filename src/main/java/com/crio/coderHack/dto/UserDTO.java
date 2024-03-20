@@ -1,8 +1,8 @@
 package com.crio.coderHack.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.validation.constraints.Max;
@@ -22,10 +22,10 @@ public class UserDTO {
     @NonNull
     @JsonProperty("userName")
     private String userName;
-    @JsonIgnore
     @Min(value = 0,message = "Score must be equal or greater than zero")
     @Max(value=100,message="Score must be equal or lesser than hundred ")
-    private Integer score;
-    @JsonIgnore
-    private List<String> badges;
+    @JsonProperty("score")
+    private Integer score=0;
+    @JsonProperty("badge")
+    private List<String> badges=new ArrayList<>();
 }

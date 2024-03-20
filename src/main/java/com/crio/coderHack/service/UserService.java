@@ -13,4 +13,5 @@ public UserDTO createUser(UserDTO u);
 public List<UserDTO> findAll();  
 public Optional<UserDTO> findById(String id);
 public Optional<UserDTO> putScoreByUserId(UserScoreDTO userScoreDTO);
+public void deleteUserById(String id);
 }
