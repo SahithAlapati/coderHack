@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
 
 import com.crio.coderHack.dto.UserDTO;
+import com.crio.coderHack.exception.AlreadyPresentException;
 import com.crio.coderHack.model.User;
 import com.crio.coderHack.repository.UserRepository;
 
@@ -25,7 +26,7 @@ public class UserServiceImpl implements UserService {
     {
         if(userRepository.findById(u.getId()).isPresent())
         {
-            
+            throw new AlreadyPresentException("A user with the same ID is already present!");
         }
         User user=modelMapper.map(u,User.class);
         return modelMapper.map(userRepository.save(user),UserDTO.class);
