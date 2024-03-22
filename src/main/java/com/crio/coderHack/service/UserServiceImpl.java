@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDTO> findAll() {
         ModelMapper modelMapper=new ModelMapper();
-        return userRepository.findAll().stream().map(s->modelMapper.map(s,UserDTO.class)).collect(Collectors.toList());
+        return userRepository.findAll().stream().map(s->modelMapper.map(s,UserDTO.class)).sorted((user1, user2)->{if(user1.getScore()!=null && user2.getScore()!=null)return user2.getScore().compareTo(user1.getScore());else return 0;}).collect(Collectors.toList());
     }
 
     @SuppressWarnings("null")
