@@ -26,10 +26,20 @@ git clone https://github.com/SahithAlapati/coderHack.git
 ```
 ## Usage
 Navigate to the project directory
-```java
+``java
 cd <your-repo-name>
 ```
 To run the project, type following command in the project directory
 ```java
 ./gradlew clean build
 ```
+## Using the API
+Once the application is running, you can make requests to the API endpoints. Here are a few examples:
+- **GET /users** - Retrieve a list of all registered users
+- **GET /users/{userId}** - Retrieve the details of a specific user
+- **POST /users** - Register a new user to the contest
+- **PUT /users/{userId}** - Update the score of a specific user
+- **DELETE /users/{userId}** - Deregister a specific user from the contest
+
+
+For detailed API documentation, visit [API Documentation](https://elements.getpostman.com/redirect?entityId=33711622-1b0be232-93b7-43d0-ba48-9cd76e765cf7&entityType=collection).
