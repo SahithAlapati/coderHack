@@ -26,7 +26,7 @@ git clone https://github.com/SahithAlapati/coderHack.git
 ```
 ## Usage
 Navigate to the project directory
-``java
+```java
 cd <your-repo-name>
 ```
 To run the project, type following command in the project directory
